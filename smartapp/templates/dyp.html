@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+
+
+        .slots-container{
+            margin-top:60px;
+            display:flex;
+        }
+        .slots-container1{
+            display:grid;
+            width:48%;
+            justify-content: center;
+            align-items: center;
+            grid-template-rows: auto;
+            height:100vh;
+        }
+        .line{
+            margin-top: 20px;
+            border-left: 2px dotted #161717;
+            border-right: 2px dotted #141414;
+            width: 10px;
+            
+        }
+        .slot{
+            cursor: pointer;
+            background-color: #2980b9;
+            color: white;
+            height: 150px;
+            width: 100px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .slot i{
+            font-size: 35px;
+            margin-bottom: 20px;
+        } 
+        .margin{
+            border-bottom: 2px dotted #242526;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">RemoPark</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasDarkNavbar"
+            aria-controls="offcanvasDarkNavbar"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="offcanvas offcanvas-end text-bg-primary"
+            tabindex="-1"
+            id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                RemoPark
+              </h5>
+              <button
+                type="button"
+                class="btn-close btn-close-white"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown"></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <section>
+            <div class="slots-container">
+            <div class="slots-container1">
+                <div class="slot" onclick="selectSlot('1')">  
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A1</div> 
+                </div>
+                <div class="margin"></div>
+                <div class="slot" onclick="selectSlot('2')">
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A2</div> 
+                </div>
+                <div class="margin"></div>
+                <div class="slot" onclick="selectSlot('3')">
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A3</div> 
+                </div>
+                <div class="margin"></div>
+            </div>
+            <div class="line"></div>
+            <div class="slots-container1">
+                <div class="slot" onclick="selectSlot('4')">
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A4</div> 
+                </div>
+                <div class="margin"></div>
+                <div class="slot" onclick="selectSlot('5')">
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A5</div> 
+                </div>
+                <div class="margin"></div>
+                <div class="slot" onclick="selectSlot('6')">
+                    <div><i class="icon fas fa-car"></i></div>
+                    <div>A6</div> 
+                </div>
+                <div class="margin"></div>
+            </div>
+        </div>
+   
+    </section>
+
+    <script>
+        function selectSlot(slot) {
+            window.location.href = "/trial/"+slot
+        }
+    </script>   
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Booking Invoice</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Booking - Invoice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #3498db;
+        }
+        .container{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .bill {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            overflow: hidden;
+            min-width: 280px; /* Decreased maximum width */
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        .bill-header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .invoice-section {
+            margin: 10px;
+        }
+        .invoice-section span {
+            font-weight: bold;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .razorpay-payment-button {
+            background-color:#3498db; /* Green background color */
+            color: #fff; /* White text color */
+            padding: 10px 20px; /* Add padding to the button */
+            border: none; /* Remove button border */
+            border-radius: 5px; /* Add border-radius for rounded corners */
+            font-size: 14px; /* Set font size */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            margin: 10px 0;
+        }
+    
+    </style>
+    <!-- Include RazorPay JavaScript SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="bill">
+            <div class="bill-header">
+                <h2>Invoice</h2>
+            </div>
+            <div class="invoice-section">
+                <span>Parking Center:</span> {{center}}
+            </div>
+            <div class="invoice-section">
+                <span>Date:</span> December 10, 2023
+            </div>
+            <div class="invoice-section">
+                <span>Parking Spot:</span> {{name}}
+            </div>
+            <div class="invoice-section">
+                <span>Time Slots:</span> <br>
+
+                {% for spot in spots %}
+                    {{spot}}<br>
+                {% endfor %}
+            </div>
+            <div class="invoice-section">
+                <span>Total Bill:</span>    {{bill}} <br>
+                
+                
+            </div>
+           
+            <div class="total">
+                
+            </div>
+            <center>
+            <form action="{% url 'payment' %}" method="POST">
+                {% csrf_token %}
+                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                        data-key="rzp_test_GtzVv7rlxPUO82"
+                        data-amount="{{bill}}"
+                        data-currency="INR" 
+                        data-buttontext="Pay with Razorpay"
+                        data-name="Remopark"
+                        data-description="Parking Booking"
+                        data-prefill.name="John Doe"
+                        data-prefill.email="john.doe@example.com"
+                        data-prefill.contact="9999999999" 
+                        data-theme.color=#0069D9    ">
+                </script>
+            </form>
+        </center>
+        </div>
+    </div>
+
+   
+
+   
+</body>
+</html>

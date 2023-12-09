@@ -1,0 +1,113 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([16.703825792982485, 74.2412964094404], 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Mock data for demonstration
+        var parking_spots = [
+            { id: 1, title: 'Spot 1', latitude: 16.703825792982485, longitude: 74.2412964094404 },
+            { id: 2, title: 'Spot 2', latitude: 16.704, longitude: 74.242 },
+        ];
+
+        // Add markers dynamically
+        parking_spots.forEach(function (spot) {
+            L.marker([spot.latitude, spot.longitude])
+                .addTo(map)
+                .bindPopup('<h3>' + spot.title + '</h3><p><a href="#spot/' + spot.id + '">Go to Spot</a></p>');
+        });
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps with Nearby Parking Slots</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl5TtsfNcQL0iLuG_STqqYcW5zgEV19no&libraries=places&callback=initMap"
+    onload="loadScript()"
+    onerror="handleError()"></script>
+
+    <script>
+        function loadScript() {
+            initMap(); // Call the initMap function when the script is loaded
+        }
+
+        function handleError() {
+            console.error('Error loading Google Maps API');
+        }
+    </script>
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 16.732177418071164, lng: 74.24054062302707 },
+                zoom: 15
+            });
+
+            var service = new google.maps.places.PlacesService(map);
+
+            var parking_spots = [
+                { title: 'D. Y. Patil College Of Engineering & Technology', desc: 'Description for Spot 1', link: '/dyp', id: 'spot1', lat: 16.732177418071164, lng: 74.24054062302707 },
+                { title: 'Shri Mahalaxmi - Ambabai Temple, Kolhapur', desc: 'Description for Spot 2', link: 'https://example.com/spot2', id: 'spot2', lat: 16.694909051126526, lng: 74.22270207513311 },
+                { title: 'Ganesh Chitra Mandir', desc: 'Description for Spot 3', link: 'https://example.com/spot3', id: 'spot3', lat: 16.708814452822946,  lng: 74.28136543709948},
+                { title: 'DMart', desc: 'Description for Spot 4', link: 'https://example.com/spot4', id: 'spot4', lat: 16.709394615465726, lng: 74.24286086692311 },
+            ];
+
+            parking_spots.forEach(function (spot) {
+                createMarker(spot);
+            });
+
+            function createMarker(spot) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: { lat: spot.lat, lng: spot.lng },
+                    icon: 'https://maps.google.com/mapfiles/ms/icons/parkinglot.png'
+                });
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: '<div>' +
+                        '<h3>' + spot.title + '</h3>' +
+                        '<p>Description: ' + spot.desc + '</p>' +
+                        '<p>Link: <a href="' + spot.link + '" target="_blank">' + spot.link + '</a></p>' +
+                        '<p>ID: ' + spot.id + '</p>' +
+                        '<p><a href="/place-details/' + spot.id + '">Go to Details</a></p>' +
+                        '</div>'
+                });
+
+                marker.addListener('click', function () {
+                    infoWindow.open(map, marker);
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>
