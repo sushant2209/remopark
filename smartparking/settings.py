@@ -92,7 +92,10 @@ DATABASES = {
     'PASSWORD': 'Nv4FVxCOwAt9',
     'HOST': 'ep-round-thunder-27061875.us-east-2.aws.neon.tech',
     'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
+    'OPTIONS': {
+            'sslmode': 'require',
+            'options': 'endpoint=ep-round-thunder-27061875',
+        },
   }
 }
 
