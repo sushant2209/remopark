@@ -196,6 +196,7 @@ def home(request):
         email = request.user.email
         slot_booked = request.user.slot_booked
         id= request.user.id
+        time= request.user.slot_booked_time
         if time is not None :
                 time= request.user.slot_booked_time
         print("time",time)
