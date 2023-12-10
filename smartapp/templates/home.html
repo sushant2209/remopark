@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<hr >
+<hr >
+{% for slot in selected_time_slots %}
+<div class="card mt-5 mx-2">
+  <h5 class="card-header">Location: {{center}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">Slot: {{ slot_booked}}</h5>
+    <p class="card-text">{{slot}}</p>
+    <a href="#" class="btn btn-primary">View Directions</a>
+  </div>
+</div>
+{% endfor %}
+<center>
+  <button type="button" class="btn btn-primary mt-5">
+    <a href="/map" style="text-decoration: none; color: white"
+      >Book Spots Now</a
+    >
+  </button>
+</center>
+{% endblock %}

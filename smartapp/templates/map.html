@@ -1,0 +1,118 @@
+{% extends 'base.html' %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps with Nearby Parking Slots</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl5TtsfNcQL0iLuG_STqqYcW5zgEV19no&libraries=places,geometry&callback=initMap"></script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        var parking_spots; // Declare parking_spots in the global scope
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 16.732177418071164, lng: 74.24054062302707 },
+                zoom: 15
+            });
+
+            var userMarker;
+
+            // Set values for parking_spots
+            parking_spots = [
+                { title: 'D. Y. Patil College Of Engineering & Technology', desc: '30Rs/Hr', link: '/dyp', lat: 16.732177418071164, lng: 74.24054062302707 },
+                { title: 'Shri Mahalaxmi - Ambabai Temple, Kolhapur', desc: '30Rs/Hr', link: '/mahalaxmi-mandir', lat: 16.694909051126526, lng: 74.22270207513311 },
+                { title: 'Ganesh Chitra Mandir', desc: '30Rs/Hr', link: '/gandhinagar', lat: 16.708814452822946, lng: 74.28136543709948 },
+                { title: 'DMart', desc: '30Rs/Hr', link: '/dmart', lat: 16.709394615465726, lng: 74.24286086692311 },
+            ];
+
+            // Create markers for parking spots
+            parking_spots.forEach(function (spot) {
+                var marker = new google.maps.Marker({
+                    position: { lat: spot.lat, lng: spot.lng },
+                    map: map,
+                    title: spot.title,
+                    icon: 'https://maps.google.com/mapfiles/ms/icons/parkinglot.png'
+                });
+
+                var infoWindowContent = '<div>' +
+                    '<h5>' + spot.title + '</h5>' +
+                    '<h6>Price: ' + spot.desc + '</h6>' +
+                    '<p>Distance: <span id="distance-' + spot.link + '">Calculating...</span></p>' +
+                    '<p><a href="' + spot.link + '">Book Spot</a></p>' +
+                    '</div>';
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: infoWindowContent
+                });
+
+                marker.addListener('click', function () {
+                    if (userMarker) {
+                        // Calculate and update the distance dynamically
+                        var spotLocation = new google.maps.LatLng(spot.lat, spot.lng);
+                        var distance = google.maps.geometry.spherical.computeDistanceBetween(userMarker.getPosition(), spotLocation);
+                        distance = (distance / 1000).toFixed(2); // Convert meters to kilometers
+
+                        // Check if the element exists before setting its content
+                        var distanceElement = document.getElementById('distance-' + spot.link);
+                        if (distanceElement) {
+                            distanceElement.textContent = distance + ' km';
+                        } else {
+                            console.error('Distance element not found: distance-' + spot.link);
+                        }
+                    }
+
+                    infoWindow.open(map, marker);
+                });
+            });
+        // ... (rest of the code)
+   
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    userMarker = new google.maps.Marker({
+                        map: map,
+                        position: userLocation,
+                        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                        title: 'Your Location'
+                    });
+
+                    // Add a click event listener to display user's info window
+                    var userInfoWindowContent = '<div>' +
+                        '<h5>Your Location</h5>' +
+                        '<p>Latitude: ' + userLocation.lat.toFixed(6) + '</p>' +
+                        '<p>Longitude: ' + userLocation.lng.toFixed(6) + '</p>' +
+                        '</div>';
+
+                    var userInfoWindow = new google.maps.InfoWindow({
+                        content: userInfoWindowContent
+                    });
+
+                    userMarker.addListener('click', function () {
+                        userInfoWindow.open(map, userMarker);
+                    });
+                }, function () {
+                    console.error('Error getting user location');
+                });
+            } else {
+                console.error('Geolocation is not supported by this browser');
+            }
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,8 @@
+
+
+<h2>Book Parking Spot</h2>
+<form method="post" action="http://127.0.0.1:8000/book  ">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book Now</button>
+</form>
