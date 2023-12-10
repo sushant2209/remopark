@@ -577,8 +577,7 @@ def get_key_from_time():
         '9': ('8:00 PM', '9:00 PM'),
     }
 
-    current_time = datetime.utcnow() 
-    
+    current_time = datetime.utcnow() + timedelta(hours=5, minutes=30)
   
     current_time_str = current_time.strftime('%I:%M %p')
     print(current_time_str)
