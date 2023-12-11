@@ -8,16 +8,16 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 time_slots = {
-    '0': '9:00 AM - 10:00 AM',
-    '1': '10:00 AM - 11:00 AM',
-    '2': '11:00 AM - 12:00 PM',
-    '3': '12:00 PM - 1:00 PM',
-    '4': '1:00 PM - 2:00 PM',
-    '5': '2:00 PM - 3:00 PM',
-    '6': '3:00 PM - 4:00 PM',
-    '7': '4:00 PM - 5:00 PM',
-    '8': '5:00 PM - 6:00 PM',
-    '9': '6:00 PM - 7:00 PM',
+    '0': '1:00 PM - 2:00 PM',
+    '1': '2:00 PM - 3:00 PM',
+    '2': '3:00 PM - 4:00 PM',
+    '3': '4:00 PM - 5:00 PM',
+    '4': '5:00 PM - 6:00 PM',
+    '5': '6:00 PM - 7:00 PM',
+    '6': '7:00 PM - 8:00 PM',
+    '7': '8:00 PM - 9:00 PM',
+    '8': '9:00 PM - 10:00 PM',
+    '9': '10:00 PM - 11:00 PM',
 }
 
 
@@ -31,17 +31,18 @@ def booking(request):
 
 def parking_spot_detail(request, parking_spot_id):
     time_slots = {
-    '0': '9:00 AM - 10:00 AM',
-    '1': '10:00 AM - 11:00 AM',
-    '2': '11:00 AM - 12:00 PM',
-    '3': '12:00 PM - 1:00 PM',
-    '4': '1:00 PM - 2:00 PM',
-    '5': '2:00 PM - 3:00 PM',
-    '6': '3:00 PM - 4:00 PM',
-    '7': '4:00 PM - 5:00 PM',
-    '8': '5:00 PM - 6:00 PM',
-    '9': '6:00 PM - 7:00 PM',
+    '0': '1:00 PM - 2:00 PM',
+    '1': '2:00 PM - 3:00 PM',
+    '2': '3:00 PM - 4:00 PM',
+    '3': '4:00 PM - 5:00 PM',
+    '4': '5:00 PM - 6:00 PM',
+    '5': '6:00 PM - 7:00 PM',
+    '6': '7:00 PM - 8:00 PM',
+    '7': '8:00 PM - 9:00 PM',
+    '8': '9:00 PM - 10:00 PM',
+    '9': '10:00 PM - 11:00 PM',
 }
+
 
     parking_spot = get_object_or_404(ParkingSpot, id=parking_spot_id)
     name = parking_spot.name
@@ -75,17 +76,18 @@ def parking_spot_detail(request, parking_spot_id):
 
 def booking_success(request, name,spots):
     time_slots = {
-    '0': '9:00 AM - 10:00 AM',
-    '1': '10:00 AM - 11:00 AM',
-    '2': '11:00 AM - 12:00 PM',
-    '3': '12:00 PM - 1:00 PM',
-    '4': '1:00 PM - 2:00 PM',
-    '5': '2:00 PM - 3:00 PM',
-    '6': '3:00 PM - 4:00 PM',
-    '7': '4:00 PM - 5:00 PM',
-    '8': '5:00 PM - 6:00 PM',
-    '9': '6:00 PM - 7:00 PM',
+    '0': '1:00 PM - 2:00 PM',
+    '1': '2:00 PM - 3:00 PM',
+    '2': '3:00 PM - 4:00 PM',
+    '3': '4:00 PM - 5:00 PM',
+    '4': '5:00 PM - 6:00 PM',
+    '5': '6:00 PM - 7:00 PM',
+    '6': '7:00 PM - 8:00 PM',
+    '7': '8:00 PM - 9:00 PM',
+    '8': '9:00 PM - 10:00 PM',
+    '9': '10:00 PM - 11:00 PM',
 }
+
 
     newlist=[]
     for i in spots:
@@ -180,17 +182,18 @@ def signup(request):
 
     return render(request, 'signup.html', {'form': form})
 time_slots = {
-    '0': '9:00 AM - 10:00 AM',
-    '1': '10:00 AM - 11:00 AM',
-    '2': '11:00 AM - 12:00 PM',
-    '3': '12:00 PM - 1:00 PM',
-    '4': '1:00 PM - 2:00 PM',
-    '5': '2:00 PM - 3:00 PM',
-    '6': '3:00 PM - 4:00 PM',
-    '7': '4:00 PM - 5:00 PM',
-    '8': '5:00 PM - 6:00 PM',
-    '9': '6:00 PM - 7:00 PM',
+    '0': '1:00 PM - 2:00 PM',
+    '1': '2:00 PM - 3:00 PM',
+    '2': '3:00 PM - 4:00 PM',
+    '3': '4:00 PM - 5:00 PM',
+    '4': '5:00 PM - 6:00 PM',
+    '5': '6:00 PM - 7:00 PM',
+    '6': '7:00 PM - 8:00 PM',
+    '7': '8:00 PM - 9:00 PM',
+    '8': '9:00 PM - 10:00 PM',
+    '9': '10:00 PM - 11:00 PM',
 }
+
 
 
 @login_required(login_url='login') 
@@ -258,17 +261,18 @@ from datetime import datetime, timedelta
 
 def get_key_from_time():
     time_slots = {
-    '0': ('9:00 AM', '10:00 AM'),
-    '1': ('10:00 AM', '11:00 AM'),
-    '2': ('11:00 AM', '12:00 PM'),
-    '3': ('12:00 PM', '1:00 PM'),
-    '4': ('1:00 PM', '2:00 PM'),
-    '5': ('2:00 PM', '3:00 PM'),
-    '6': ('3:00 PM', '4:00 PM'),
-    '7': ('4:00 PM', '5:00 PM'),
-    '8': ('5:00 PM', '6:00 PM'),
-    '9': ('6:00 PM', '7:00 PM'),
-        }
+    '0': ('1:00 PM', '2:00 PM'),
+    '1': ('2:00 PM', '3:00 PM'),
+    '2': ('3:00 PM', '4:00 PM'),
+    '3': ('4:00 PM', '5:00 PM'),
+    '4': ('5:00 PM', '6:00 PM'),
+    '5': ('6:00 PM', '7:00 PM'),
+    '6': ('7:00 PM', '8:00 PM'),
+    '7': ('8:00 PM', '9:00 PM'),
+    '8': ('9:00 PM', '10:00 PM'),
+    '9': ('10:00 PM', '11:00 PM'),
+    }
+
 
 
     current_time = datetime.utcnow() + timedelta(hours=5, minutes=30) 
