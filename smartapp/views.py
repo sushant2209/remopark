@@ -8,17 +8,18 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 time_slots = {
-        '0': '11:00 AM - 12:00 PM',
-        '1': '12:00 PM - 1:00 PM',
-        '2': '1:00 PM - 2:00 PM',
-        '3': '2:00 PM - 3:00 PM',
-        '4': '3:00 PM - 4:00 PM',
-        '5': '4:00 PM - 5:00 PM',
-        '6': '5:00 PM - 6:00 PM',
-        '7': '6:00 PM - 7:00 PM',
-        '8': '7:00 PM - 8:00 PM',
-        '9': '8:00 PM - 9:00 PM',
+    '0': '9:00 AM - 10:00 AM',
+    '1': '10:00 AM - 11:00 AM',
+    '2': '11:00 AM - 12:00 PM',
+    '3': '12:00 PM - 1:00 PM',
+    '4': '1:00 PM - 2:00 PM',
+    '5': '2:00 PM - 3:00 PM',
+    '6': '3:00 PM - 4:00 PM',
+    '7': '4:00 PM - 5:00 PM',
+    '8': '5:00 PM - 6:00 PM',
+    '9': '6:00 PM - 7:00 PM',
 }
+
 
 def list(request):
     spots=ParkingSpot.objects.all()
@@ -30,17 +31,18 @@ def booking(request):
 
 def parking_spot_detail(request, parking_spot_id):
     time_slots = {
-        '0': '11:00 AM - 12:00 PM',
-        '1': '12:00 PM - 1:00 PM',
-        '2': '1:00 PM - 2:00 PM',
-        '3': '2:00 PM - 3:00 PM',
-        '4': '3:00 PM - 4:00 PM',
-        '5': '4:00 PM - 5:00 PM',
-        '6': '5:00 PM - 6:00 PM',
-        '7': '6:00 PM - 7:00 PM',
-        '8': '7:00 PM - 8:00 PM',
-        '9': '8:00 PM - 9:00 PM',
+    '0': '9:00 AM - 10:00 AM',
+    '1': '10:00 AM - 11:00 AM',
+    '2': '11:00 AM - 12:00 PM',
+    '3': '12:00 PM - 1:00 PM',
+    '4': '1:00 PM - 2:00 PM',
+    '5': '2:00 PM - 3:00 PM',
+    '6': '3:00 PM - 4:00 PM',
+    '7': '4:00 PM - 5:00 PM',
+    '8': '5:00 PM - 6:00 PM',
+    '9': '6:00 PM - 7:00 PM',
 }
+
     parking_spot = get_object_or_404(ParkingSpot, id=parking_spot_id)
     name = parking_spot.name
 
@@ -73,17 +75,18 @@ def parking_spot_detail(request, parking_spot_id):
 
 def booking_success(request, name,spots):
     time_slots = {
-        '0': '11:00 AM - 12:00 PM',
-        '1': '12:00 PM - 1:00 PM',
-        '2': '1:00 PM - 2:00 PM',
-        '3': '2:00 PM - 3:00 PM',
-        '4': '3:00 PM - 4:00 PM',
-        '5': '4:00 PM - 5:00 PM',
-        '6': '5:00 PM - 6:00 PM',
-        '7': '6:00 PM - 7:00 PM',
-        '8': '7:00 PM - 8:00 PM',
-        '9': '8:00 PM - 9:00 PM',
+    '0': '9:00 AM - 10:00 AM',
+    '1': '10:00 AM - 11:00 AM',
+    '2': '11:00 AM - 12:00 PM',
+    '3': '12:00 PM - 1:00 PM',
+    '4': '1:00 PM - 2:00 PM',
+    '5': '2:00 PM - 3:00 PM',
+    '6': '3:00 PM - 4:00 PM',
+    '7': '4:00 PM - 5:00 PM',
+    '8': '5:00 PM - 6:00 PM',
+    '9': '6:00 PM - 7:00 PM',
 }
+
     newlist=[]
     for i in spots:
         newlist.append(time_slots[i])
@@ -177,17 +180,18 @@ def signup(request):
 
     return render(request, 'signup.html', {'form': form})
 time_slots = {
-        '0': '11:00 AM - 12:00 PM',
-        '1': '12:00 PM - 1:00 PM',
-        '2': '1:00 PM - 2:00 PM',
-        '3': '2:00 PM - 3:00 PM',
-        '4': '3:00 PM - 4:00 PM',
-        '5': '4:00 PM - 5:00 PM',
-        '6': '5:00 PM - 6:00 PM',
-        '7': '6:00 PM - 7:00 PM',
-        '8': '7:00 PM - 8:00 PM',
-        '9': '8:00 PM - 9:00 PM',
+    '0': '9:00 AM - 10:00 AM',
+    '1': '10:00 AM - 11:00 AM',
+    '2': '11:00 AM - 12:00 PM',
+    '3': '12:00 PM - 1:00 PM',
+    '4': '1:00 PM - 2:00 PM',
+    '5': '2:00 PM - 3:00 PM',
+    '6': '3:00 PM - 4:00 PM',
+    '7': '4:00 PM - 5:00 PM',
+    '8': '5:00 PM - 6:00 PM',
+    '9': '6:00 PM - 7:00 PM',
 }
+
 
 @login_required(login_url='login') 
 def home(request):
@@ -198,11 +202,13 @@ def home(request):
         id= request.user.id
         time= request.user.slot_booked_time
         print("time",time)
-        selected_time_slots =[time_slots[slot] for slot in time]
-        print(selected_time_slots)
-        finalTimes=deleteSpots(time)  
+        selected_time_slots=''
         userInfo = get_object_or_404(CustomUser, id=request.user.id)
-        userInfo.slot_booked_time=finalTimes
+        if isinstance(time, str):
+            selected_time_slots =[time_slots[slot] for slot in time]
+            print(selected_time_slots)
+            finalTimes=deleteSpots(time)  
+            userInfo.slot_booked_time=finalTimes
         center=userInfo.center
         userInfo.save()
         print(time)
@@ -217,7 +223,7 @@ def home(request):
 
         return render(request, 'home.html', context)
     else:
-        return render(request, 'home.html') 
+        return render(request, 'home.html')
 
 def map(request):
     return render(request,'map.html')
@@ -250,17 +256,18 @@ from datetime import datetime, timedelta
 
 def get_key_from_time():
     time_slots = {
-        '0': ('11:00 AM', '12:00 PM'),
-        '1': ('12:00 PM', '1:00 PM'),
-        '2': ('1:00 PM', '2:00 PM'),
-        '3': ('2:00 PM', '3:00 PM'),
-        '4': ('3:00 PM', '4:00 PM'),
-        '5': ('4:00 PM', '5:00 PM'),
-        '6': ('5:00 PM', '6:00 PM'),
-        '7': ('6:00 PM', '7:00 PM'),
-        '8': ('7:00 PM', '8:00 PM'),
-        '9': ('8:00 PM', '9:00 PM'),
-    }
+    '0': ('9:00 AM', '10:00 AM'),
+    '1': ('10:00 AM', '11:00 AM'),
+    '2': ('11:00 AM', '12:00 PM'),
+    '3': ('12:00 PM', '1:00 PM'),
+    '4': ('1:00 PM', '2:00 PM'),
+    '5': ('2:00 PM', '3:00 PM'),
+    '6': ('3:00 PM', '4:00 PM'),
+    '7': ('4:00 PM', '5:00 PM'),
+    '8': ('5:00 PM', '6:00 PM'),
+    '9': ('6:00 PM', '7:00 PM'),
+        }
+
 
     current_time = datetime.utcnow() 
   
