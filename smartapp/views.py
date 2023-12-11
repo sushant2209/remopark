@@ -210,6 +210,7 @@ def home(request):
             finalTimes=deleteSpots(time)  
             userInfo.slot_booked_time=finalTimes
         center=userInfo.center
+        location=userInfo.location
         userInfo.save()
         print(time)
         time    
@@ -218,7 +219,8 @@ def home(request):
             'email': email,
             'slot_booked':slot_booked,
             'center':center,
-            'selected_time_slots':selected_time_slots
+            'selected_time_slots':selected_time_slots,
+            'location':location
         }
 
         return render(request, 'home.html', context)
