@@ -300,6 +300,8 @@ def services(request):
     return render(request,'services.html')
 def profile(request):
     return render(request,'profile.html')
+def destination(request):
+    return render(request,'destination.html')
 
 
 
