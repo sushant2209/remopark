@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-time Tracking</title>
+{% extends 'base.html' %} 
+{% block content %}
     <style>
         #map {
-            height: 400px;
+            height: 100vh;
             width: 100%;
         }
     </style>
@@ -151,5 +147,5 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl5TtsfNcQL0iLuG_STqqYcW5zgEV19no&callback=initMap">
     </script>
-</body>
-</html>
+
+{% endblock %}
